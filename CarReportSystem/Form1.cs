@@ -15,6 +15,7 @@ namespace CarReportSystem
         public Form1()
         {
             InitializeComponent();
+
         }
     }
 }
