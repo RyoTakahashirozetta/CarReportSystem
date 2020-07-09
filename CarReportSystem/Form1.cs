@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,35 +25,52 @@ namespace CarReportSystem
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            CarReport carReport = new CarReport
+            if (cbAuthor.Text == "" || cbName.Text == "")
             {
-                //BindingListへ登録
-                CreatedSate = dtpDate.Value,
-                Author = cbAuthor.Text,
-                Name = cbName.Text,
-                Report = tbReport.Text,
-                Picture = pictureBox1.Image,
-                Maker = makername()
-            };
-            _carReports.Insert(0,carReport);
+                MessageBox.Show("記録者、車名を入力してください", "エラーメッセージ");
+            }
+            else
+            {
+                CarReport carReport = new CarReport
+                {
+                    //BindingListへ登録
+                    CreatedSate = dtpDate.Value,
+                    Author = cbAuthor.Text,
+                    Name = cbName.Text,
+                    Report = tbReport.Text,
+                    Picture = pbImage.Image,
+                    Maker = makername()
+                };
+                //dgvへの表示
+                _carReports.Insert(0, carReport);
 
+                btDelete2.Enabled = false;
+                btFix.Enabled = false;
+
+                //コンボボックスの入力候補に追加
+                setComboBoxMakerAuthor(cbAuthor.Text);
+                setComboBoxMakerName(cbName.Text);
+
+                //表示欄を初期状態に戻す
+                reset();
+            }
+            
         }
 
         private void btOpen_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (ofdOpenImage.ShowDialog() == DialogResult.OK)
             {
                 //選択した画像をピクチャーボックスに表示
-                pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+                pbImage.Image = Image.FromFile(ofdOpenImage.FileName);
                 //ピクチャーボックスのサイズに画像を調整
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-
+                pbImage.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
 
         private void btDelete_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = null;
+            pbImage.Image = null;
         }
 
         private CarMaker makername()
@@ -96,10 +116,184 @@ namespace CarReportSystem
             selectedCarReport.Author = cbAuthor.Text;
             selectedCarReport.Name = cbName.Text;
             selectedCarReport.Report = tbReport.Text;
-            selectedCarReport.Picture = pictureBox1.Image;
+            selectedCarReport.Picture = pbImage.Image;
             selectedCarReport.Maker = makername();
 
-           dgvCarReport.Refresh(); //データグリッドビューの再描画1
+            
+
+            dgvCarReport.Refresh(); //データグリッドビューの再描画1
         }
+
+        private void btDelete2_Click(object sender, EventArgs e)
+        {
+            
+            _carReports.RemoveAt(dgvCarReport.CurrentRow.Index);
+            
+            dgvCarReport.ClearSelection();
+
+            btDelete2.Enabled = false;
+
+            btFix.Enabled = false;
+        }
+
+        void initButton()
+        {
+            if (_carReports.Count == 0)
+            {
+                btFix.Enabled = false;
+                btDelete2.Enabled = false;
+            }
+            else
+            {
+                btFix.Enabled = true;
+                btDelete2.Enabled = true;
+            }
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            initButton();
+        }
+
+        private void setComboBoxMakerAuthor(string maker)
+        {
+            if (!cbAuthor.Items.Contains(maker))
+            {
+                cbAuthor.Items.Add(maker);
+            }
+            
+        }
+
+        private void setComboBoxMakerName(string maker)
+        {
+            if (!cbName.Items.Contains(maker))
+            {
+                cbName.Items.Add(maker);
+            }
+        }
+
+        private void reset()
+        {
+            dgvCarReport.ClearSelection();
+
+            dtpDate.Value = DateTime.Now;
+            cbAuthor.Text = null;
+            cbName.Text = null;
+            pbImage.Image = null;
+            tbReport.Text = null; 
+
+        }
+
+        private void dgvCarReport_Click(object sender, EventArgs e)
+        {
+            if (dgvCarReport.CurrentRow != null)
+            {
+                CarReport selectedCarReport = _carReports[dgvCarReport.CurrentRow.Index];
+                dtpDate.Value = selectedCarReport.CreatedSate.Date;
+                cbAuthor.Text = selectedCarReport.Author;
+                cbName.Text = selectedCarReport.Name;
+                tbReport.Text = selectedCarReport.Report;
+                pbImage.Image = selectedCarReport.Picture;
+                radioButtonSelect();
+                initButton();
+            }
+        }
+
+
+
+        private void radioButtonSelect()
+         {
+            CarReport selectedCarReport = _carReports[dgvCarReport.CurrentRow.Index];
+            if (CarMaker.トヨタ == selectedCarReport.Maker)
+             {
+                 radioButton1.Checked = true;
+             }
+            else if (CarMaker.日産 == selectedCarReport.Maker)
+            {
+                radioButton2.Checked = true;
+            }
+            else if (CarMaker.ホンダ == selectedCarReport.Maker)
+            {
+                radioButton3.Checked = true;
+            }
+            else if (CarMaker.スバル == selectedCarReport.Maker)
+            {
+                radioButton4.Checked = true;
+            }
+            else if (CarMaker.外車 == selectedCarReport.Maker)
+            {
+                radioButton5.Checked = true;
+            }
+            else if (CarMaker.その他 == selectedCarReport.Maker)
+            {
+                radioButton6.Checked = true;
+            }
+        }
+
+        private void btOpen_Click_1(object sender, EventArgs e)
+        {
+            //オープンファイルダイアログを表示
+            if (ofdOpenData.ShowDialog() == DialogResult.OK)
+            {
+
+                using (FileStream fs = new FileStream(ofdOpenData.FileName, FileMode.Open))
+                {
+                    try
+                    {
+                        BinaryFormatter formatter = new BinaryFormatter();
+
+
+                        _carReports = (BindingList<CarReport>)formatter.Deserialize(fs);
+                        dgvCarReport.DataSource = _carReports;
+                        dgvCarReport_Click(sender, e);
+                    }
+                    catch (SerializationException se)
+                    {
+                        Console.WriteLine("Failed to deserialize. Reason: " + se.Message);
+                        throw;
+
+                    }
+
+                }
+
+
+            }
+        }
+
+        private void btClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btSav_Click(object sender, EventArgs e)
+        {
+            //セーブファイルダイアログを表示
+            if (sfdSaveData.ShowDialog() == DialogResult.OK)
+            {
+
+                BinaryFormatter formatter = new BinaryFormatter();
+
+                //ファイルストリームを生成
+                using (FileStream fs = new FileStream(sfdSaveData.FileName, FileMode.Create))
+                {
+                    try
+                    {
+                        //シリアル化して保存
+                        formatter.Serialize(fs, _carReports);
+                    }
+                    catch (SerializationException se)
+                    {
+                        Console.WriteLine("Failed to serialize. Reason: " + se.Message);
+                        throw;
+                    }
+
+
+
+                }
+
+            }
+        }
+
     }
 }

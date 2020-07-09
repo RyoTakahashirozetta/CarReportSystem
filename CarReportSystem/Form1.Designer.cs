@@ -45,20 +45,25 @@
             this.tbReport = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvCarReport = new System.Windows.Forms.DataGridView();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbImage = new System.Windows.Forms.PictureBox();
             this.btAdd = new System.Windows.Forms.Button();
             this.btDelete = new System.Windows.Forms.Button();
             this.btFix = new System.Windows.Forms.Button();
             this.btDelete2 = new System.Windows.Forms.Button();
-            this.btOpen = new System.Windows.Forms.Button();
+            this.btOpenImage = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.ofdOpenImage = new System.Windows.Forms.OpenFileDialog();
+            this.btOpen = new System.Windows.Forms.Button();
+            this.btSav = new System.Windows.Forms.Button();
+            this.btClose = new System.Windows.Forms.Button();
+            this.ofdOpenData = new System.Windows.Forms.OpenFileDialog();
+            this.sfdSaveData = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReport)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -124,6 +129,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(20, 15);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(47, 16);
@@ -214,20 +220,27 @@
             // 
             // dgvCarReport
             // 
+            this.dgvCarReport.AllowUserToAddRows = false;
             this.dgvCarReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCarReport.Location = new System.Drawing.Point(116, 288);
+            this.dgvCarReport.MultiSelect = false;
             this.dgvCarReport.Name = "dgvCarReport";
+            this.dgvCarReport.ReadOnly = true;
             this.dgvCarReport.RowTemplate.Height = 21;
+            this.dgvCarReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCarReport.Size = new System.Drawing.Size(672, 150);
             this.dgvCarReport.TabIndex = 6;
+            this.dgvCarReport.Click += new System.EventHandler(this.dgvCarReport_Click);
             // 
-            // pictureBox1
+            // pbImage
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(530, 33);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(226, 178);
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
+            this.pbImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbImage.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.pbImage.Location = new System.Drawing.Point(530, 33);
+            this.pbImage.Name = "pbImage";
+            this.pbImage.Size = new System.Drawing.Size(226, 178);
+            this.pbImage.TabIndex = 7;
+            this.pbImage.TabStop = false;
             // 
             // btAdd
             // 
@@ -267,16 +280,17 @@
             this.btDelete2.TabIndex = 8;
             this.btDelete2.Text = "削除";
             this.btDelete2.UseVisualStyleBackColor = true;
+            this.btDelete2.Click += new System.EventHandler(this.btDelete2_Click);
             // 
-            // btOpen
+            // btOpenImage
             // 
-            this.btOpen.Location = new System.Drawing.Point(600, 4);
-            this.btOpen.Name = "btOpen";
-            this.btOpen.Size = new System.Drawing.Size(75, 23);
-            this.btOpen.TabIndex = 8;
-            this.btOpen.Text = "開く";
-            this.btOpen.UseVisualStyleBackColor = true;
-            this.btOpen.Click += new System.EventHandler(this.btOpen_Click);
+            this.btOpenImage.Location = new System.Drawing.Point(600, 4);
+            this.btOpenImage.Name = "btOpenImage";
+            this.btOpenImage.Size = new System.Drawing.Size(75, 23);
+            this.btOpenImage.TabIndex = 8;
+            this.btOpenImage.Text = "開く";
+            this.btOpenImage.UseVisualStyleBackColor = true;
+            this.btOpenImage.Click += new System.EventHandler(this.btOpen_Click);
             // 
             // label7
             // 
@@ -328,26 +342,63 @@
             this.label10.TabIndex = 13;
             this.label10.Text = "車名：";
             // 
-            // openFileDialog1
+            // ofdOpenImage
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.ofdOpenImage.FileName = "openFileDialog1";
+            // 
+            // btOpen
+            // 
+            this.btOpen.Location = new System.Drawing.Point(28, 328);
+            this.btOpen.Name = "btOpen";
+            this.btOpen.Size = new System.Drawing.Size(75, 23);
+            this.btOpen.TabIndex = 14;
+            this.btOpen.Text = "開く";
+            this.btOpen.UseVisualStyleBackColor = true;
+            this.btOpen.Click += new System.EventHandler(this.btOpen_Click_1);
+            // 
+            // btSav
+            // 
+            this.btSav.Location = new System.Drawing.Point(29, 370);
+            this.btSav.Name = "btSav";
+            this.btSav.Size = new System.Drawing.Size(75, 23);
+            this.btSav.TabIndex = 15;
+            this.btSav.Text = "保存";
+            this.btSav.UseVisualStyleBackColor = true;
+            this.btSav.Click += new System.EventHandler(this.btSav_Click);
+            // 
+            // btClose
+            // 
+            this.btClose.Location = new System.Drawing.Point(692, 453);
+            this.btClose.Name = "btClose";
+            this.btClose.Size = new System.Drawing.Size(75, 23);
+            this.btClose.TabIndex = 16;
+            this.btClose.Text = "終了";
+            this.btClose.UseVisualStyleBackColor = true;
+            this.btClose.Click += new System.EventHandler(this.btClose_Click);
+            // 
+            // ofdOpenData
+            // 
+            this.ofdOpenData.FileName = "openFileDialog1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 488);
+            this.Controls.Add(this.btClose);
+            this.Controls.Add(this.btSav);
+            this.Controls.Add(this.btOpen);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.btOpen);
+            this.Controls.Add(this.btOpenImage);
             this.Controls.Add(this.btDelete);
             this.Controls.Add(this.btDelete2);
             this.Controls.Add(this.btFix);
             this.Controls.Add(this.btAdd);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbImage);
             this.Controls.Add(this.dgvCarReport);
             this.Controls.Add(this.tbReport);
             this.Controls.Add(this.cbName);
@@ -360,9 +411,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "試乗レポート管理システム";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReport)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -389,18 +441,23 @@
         private System.Windows.Forms.TextBox tbReport;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dgvCarReport;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbImage;
         private System.Windows.Forms.Button btAdd;
         private System.Windows.Forms.Button btDelete;
         private System.Windows.Forms.Button btFix;
         private System.Windows.Forms.Button btDelete2;
-        private System.Windows.Forms.Button btOpen;
+        private System.Windows.Forms.Button btOpenImage;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog ofdOpenImage;
+        private System.Windows.Forms.Button btOpen;
+        private System.Windows.Forms.Button btSav;
+        private System.Windows.Forms.Button btClose;
+        private System.Windows.Forms.OpenFileDialog ofdOpenData;
+        private System.Windows.Forms.SaveFileDialog sfdSaveData;
     }
 }
 
