@@ -223,11 +223,8 @@
             this.dgvCarReport.AllowUserToAddRows = false;
             this.dgvCarReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCarReport.Location = new System.Drawing.Point(116, 288);
-            this.dgvCarReport.MultiSelect = false;
             this.dgvCarReport.Name = "dgvCarReport";
-            this.dgvCarReport.ReadOnly = true;
             this.dgvCarReport.RowTemplate.Height = 21;
-            this.dgvCarReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCarReport.Size = new System.Drawing.Size(672, 150);
             this.dgvCarReport.TabIndex = 6;
             this.dgvCarReport.Click += new System.EventHandler(this.dgvCarReport_Click);

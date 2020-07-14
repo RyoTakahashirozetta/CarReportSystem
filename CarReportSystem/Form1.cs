@@ -34,7 +34,7 @@ namespace CarReportSystem
                 CarReport carReport = new CarReport
                 {
                     //BindingListへ登録
-                    CreatedSate = dtpDate.Value,
+                    CreatedSate = dtpDate.Value.Date,
                     Author = cbAuthor.Text,
                     Name = cbName.Text,
                     Report = tbReport.Text,
