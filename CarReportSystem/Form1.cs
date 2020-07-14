@@ -20,7 +20,7 @@ namespace CarReportSystem
         public Form1()
         {
             InitializeComponent();
-            dgvCarReport.DataSource = _carReports;
+            //dgvCarReport.DataSource = _carReports;
         }
 
         private void btAdd_Click(object sender, EventArgs e)
@@ -153,7 +153,10 @@ namespace CarReportSystem
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: このコード行はデータを 'infosys202025DataSet.CarReport' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+            
             initButton();
+            dgvCarReport.Columns[0].Visible = false; //idを非表示にする
         }
 
         private void setComboBoxMakerAuthor(string maker)
@@ -189,12 +192,13 @@ namespace CarReportSystem
         {
             if (dgvCarReport.CurrentRow != null)
             {
-                CarReport selectedCarReport = _carReports[dgvCarReport.CurrentRow.Index];
-                dtpDate.Value = selectedCarReport.CreatedSate.Date;
-                cbAuthor.Text = selectedCarReport.Author;
-                cbName.Text = selectedCarReport.Name;
-                tbReport.Text = selectedCarReport.Report;
-                pbImage.Image = selectedCarReport.Picture;
+                var test = dgvCarReport.CurrentRow.Cells[3].Value; //選択している行の指定したセルの値を取得
+                /* CarReport selectedCarReport = _carReports[dgvCarReport.CurrentRow.Index];
+                 dtpDate.Value = selectedCarReport.CreatedSate.Date;
+                 cbAuthor.Text = selectedCarReport.Author;
+                 cbName.Text = selectedCarReport.Name;
+                 tbReport.Text = selectedCarReport.Report;
+                 pbImage.Image = selectedCarReport.Picture;*/
                 radioButtonSelect();
                 initButton();
             }
@@ -233,7 +237,9 @@ namespace CarReportSystem
 
         private void btOpen_Click_1(object sender, EventArgs e)
         {
+            this.carReportTableAdapter.Fill(this.infosys202025DataSet.CarReport);
             //オープンファイルダイアログを表示
+            /*
             if (ofdOpenData.ShowDialog() == DialogResult.OK)
             {
 
@@ -258,7 +264,7 @@ namespace CarReportSystem
                 }
 
 
-            }
+            }*/
         }
 
         private void btClose_Click(object sender, EventArgs e)
@@ -295,5 +301,12 @@ namespace CarReportSystem
             }
         }
 
+        private void carReportBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.carReportBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202025DataSet);
+
+        }
     }
 }
