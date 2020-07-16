@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -77,27 +78,27 @@ namespace CarReportSystem
         {
             
 
-            if (radioButton1.Checked == true)
+            if (toyota.Checked == true)
             {
                 return CarMaker.トヨタ;
             }
 
-            else if (radioButton2.Checked == true)
+            else if (nissan.Checked == true)
             {
                 return CarMaker.日産;
             }
 
-            else if (radioButton3.Checked == true)
+            else if (honnda.Checked == true)
             {
                 return CarMaker.ホンダ;
             }
 
-            else if (radioButton4.Checked == true)
+            else if (subaru.Checked == true)
             {
                 return CarMaker.スバル;
             }
 
-            else if (radioButton5.Checked == true)
+            else if (gaisya.Checked == true)
             {
                 return CarMaker.外車;
             }
@@ -190,16 +191,18 @@ namespace CarReportSystem
 
         private void dgvCarReport_Click(object sender, EventArgs e)
         {
+            
             if (dgvCarReport.CurrentRow != null)
             {
-                var test = dgvCarReport.CurrentRow.Cells[3].Value; //選択している行の指定したセルの値を取得
+                var Maker = dgvCarReport.CurrentRow.Cells[3].Value; //選択している行の指定したセルの値を取得
                 /* CarReport selectedCarReport = _carReports[dgvCarReport.CurrentRow.Index];
                  dtpDate.Value = selectedCarReport.CreatedSate.Date;
                  cbAuthor.Text = selectedCarReport.Author;
                  cbName.Text = selectedCarReport.Name;
                  tbReport.Text = selectedCarReport.Report;
                  pbImage.Image = selectedCarReport.Picture;*/
-                radioButtonSelect();
+               // radioButtonSelect();
+                SelectMaker();      
                 initButton();
             }
         }
@@ -211,33 +214,34 @@ namespace CarReportSystem
             CarReport selectedCarReport = _carReports[dgvCarReport.CurrentRow.Index];
             if (CarMaker.トヨタ == selectedCarReport.Maker)
              {
-                 radioButton1.Checked = true;
+                 toyota.Checked = true;
              }
             else if (CarMaker.日産 == selectedCarReport.Maker)
             {
-                radioButton2.Checked = true;
+                nissan.Checked = true;
             }
             else if (CarMaker.ホンダ == selectedCarReport.Maker)
             {
-                radioButton3.Checked = true;
+                honnda.Checked = true;
             }
             else if (CarMaker.スバル == selectedCarReport.Maker)
             {
-                radioButton4.Checked = true;
+                subaru.Checked = true;
             }
             else if (CarMaker.外車 == selectedCarReport.Maker)
             {
-                radioButton5.Checked = true;
+                gaisya.Checked = true;
             }
             else if (CarMaker.その他 == selectedCarReport.Maker)
             {
-                radioButton6.Checked = true;
+                sonota.Checked = true;
             }
         }
 
         private void btOpen_Click_1(object sender, EventArgs e)
         {
             this.carReportTableAdapter.Fill(this.infosys202025DataSet.CarReport);
+            SelectMaker();
             //オープンファイルダイアログを表示
             /*
             if (ofdOpenData.ShowDialog() == DialogResult.OK)
@@ -307,6 +311,64 @@ namespace CarReportSystem
             this.carReportBindingSource.EndEdit();
             this.tableAdapterManager.UpdateAll(this.infosys202025DataSet);
 
+        }
+
+        private void SelectMaker()
+        {
+
+            var Maker = dgvCarReport.CurrentRow.Cells[3].Value;
+            switch (Maker.ToString())
+            {
+                case "トヨタ":
+                    toyota.Checked = true;
+                    break;
+
+                case "日産":
+                    nissan.Checked = true;
+                    break;
+
+                case "ホンダ":
+                    honnda.Checked = true;
+                    break;
+
+                case "スバル":
+                    subaru.Checked = true;
+                    break;
+
+                case "外車":
+                    gaisya.Checked = true;
+                    break;
+
+                default:
+                    sonota.Checked = true;
+                    break;
+
+                
+            }
+        }
+
+        // バイト配列をImageオブジェクトに変換
+        public static Image ByteArrayToImage(byte[] byteData)
+        {
+            ImageConverter imgconv = new ImageConverter();
+            Image img = (Image)imgconv.ConvertFrom(byteData);
+            return img;
+        }
+
+        // Imageオブジェクトをバイト配列に変換
+        public static byte[] ImageToByteArray(Image img)
+        {
+            ImageConverter imgconv = new ImageConverter();
+            byte[] byteData = (byte[])imgconv.ConvertTo(img, typeof(byte[]));
+            return byteData;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dgvCarReport.CurrentRow.Cells[2].Value = cbAuthor.Text;
+            this.Validate();
+            this.carReportBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202025DataSet);
         }
     }
 }

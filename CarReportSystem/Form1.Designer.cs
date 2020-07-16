@@ -39,12 +39,12 @@
             this.cbAuthor = new System.Windows.Forms.ComboBox();
             this.carReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.infosys202025DataSet = new CarReportSystem.infosys202025DataSet();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.toyota = new System.Windows.Forms.RadioButton();
+            this.nissan = new System.Windows.Forms.RadioButton();
+            this.honnda = new System.Windows.Forms.RadioButton();
+            this.subaru = new System.Windows.Forms.RadioButton();
+            this.gaisya = new System.Windows.Forms.RadioButton();
+            this.sonota = new System.Windows.Forms.RadioButton();
             this.cbName = new System.Windows.Forms.ComboBox();
             this.tbReport = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -88,6 +88,7 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.carReportTableAdapter = new CarReportSystem.infosys202025DataSetTableAdapters.CarReportTableAdapter();
             this.tableAdapterManager = new CarReportSystem.infosys202025DataSetTableAdapters.TableAdapterManager();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.carReportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.infosys202025DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
@@ -101,7 +102,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(27, 30);
+            this.label1.Location = new System.Drawing.Point(28, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 12);
             this.label1.TabIndex = 0;
@@ -109,7 +110,7 @@
             // 
             // dtpDate
             // 
-            this.dtpDate.Location = new System.Drawing.Point(116, 25);
+            this.dtpDate.Location = new System.Drawing.Point(115, 50);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(200, 19);
             this.dtpDate.TabIndex = 1;
@@ -125,7 +126,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 69);
+            this.label3.Location = new System.Drawing.Point(28, 90);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 12);
             this.label3.TabIndex = 0;
@@ -142,7 +143,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(27, 184);
+            this.label5.Location = new System.Drawing.Point(27, 249);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 12);
             this.label5.TabIndex = 0;
@@ -152,7 +153,7 @@
             // 
             this.cbAuthor.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "Author", true));
             this.cbAuthor.FormattingEnabled = true;
-            this.cbAuthor.Location = new System.Drawing.Point(116, 61);
+            this.cbAuthor.Location = new System.Drawing.Point(115, 90);
             this.cbAuthor.Name = "cbAuthor";
             this.cbAuthor.Size = new System.Drawing.Size(121, 20);
             this.cbAuthor.TabIndex = 2;
@@ -167,78 +168,78 @@
             this.infosys202025DataSet.DataSetName = "infosys202025DataSet";
             this.infosys202025DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // radioButton1
+            // toyota
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(20, 15);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(47, 16);
-            this.radioButton1.TabIndex = 3;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "トヨタ";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.toyota.AutoSize = true;
+            this.toyota.Checked = true;
+            this.toyota.Location = new System.Drawing.Point(20, 15);
+            this.toyota.Name = "toyota";
+            this.toyota.Size = new System.Drawing.Size(47, 16);
+            this.toyota.TabIndex = 3;
+            this.toyota.TabStop = true;
+            this.toyota.Text = "トヨタ";
+            this.toyota.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // nissan
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(73, 15);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(47, 16);
-            this.radioButton2.TabIndex = 3;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "日産";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.nissan.AutoSize = true;
+            this.nissan.Location = new System.Drawing.Point(74, 15);
+            this.nissan.Name = "nissan";
+            this.nissan.Size = new System.Drawing.Size(47, 16);
+            this.nissan.TabIndex = 3;
+            this.nissan.TabStop = true;
+            this.nissan.Text = "日産";
+            this.nissan.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // honnda
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(126, 15);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(51, 16);
-            this.radioButton3.TabIndex = 3;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "ホンダ";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.honnda.AutoSize = true;
+            this.honnda.Location = new System.Drawing.Point(126, 15);
+            this.honnda.Name = "honnda";
+            this.honnda.Size = new System.Drawing.Size(51, 16);
+            this.honnda.TabIndex = 3;
+            this.honnda.TabStop = true;
+            this.honnda.Text = "ホンダ";
+            this.honnda.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // subaru
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(183, 15);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(52, 16);
-            this.radioButton4.TabIndex = 3;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "スバル";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.subaru.AutoSize = true;
+            this.subaru.Location = new System.Drawing.Point(183, 15);
+            this.subaru.Name = "subaru";
+            this.subaru.Size = new System.Drawing.Size(52, 16);
+            this.subaru.TabIndex = 3;
+            this.subaru.TabStop = true;
+            this.subaru.Text = "スバル";
+            this.subaru.UseVisualStyleBackColor = true;
             // 
-            // radioButton5
+            // gaisya
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(241, 15);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(47, 16);
-            this.radioButton5.TabIndex = 3;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "外車";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.gaisya.AutoSize = true;
+            this.gaisya.Location = new System.Drawing.Point(241, 15);
+            this.gaisya.Name = "gaisya";
+            this.gaisya.Size = new System.Drawing.Size(47, 16);
+            this.gaisya.TabIndex = 3;
+            this.gaisya.TabStop = true;
+            this.gaisya.Text = "外車";
+            this.gaisya.UseVisualStyleBackColor = true;
             // 
-            // radioButton6
+            // sonota
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(294, 15);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(54, 16);
-            this.radioButton6.TabIndex = 3;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "その他";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.sonota.AutoSize = true;
+            this.sonota.Location = new System.Drawing.Point(294, 15);
+            this.sonota.Name = "sonota";
+            this.sonota.Size = new System.Drawing.Size(54, 16);
+            this.sonota.TabIndex = 3;
+            this.sonota.TabStop = true;
+            this.sonota.Text = "その他";
+            this.sonota.UseVisualStyleBackColor = true;
             // 
             // cbName
             // 
             this.cbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "Name", true));
             this.cbName.FormattingEnabled = true;
-            this.cbName.Location = new System.Drawing.Point(116, 144);
+            this.cbName.Location = new System.Drawing.Point(115, 186);
             this.cbName.Name = "cbName";
             this.cbName.Size = new System.Drawing.Size(121, 20);
             this.cbName.TabIndex = 4;
@@ -246,7 +247,7 @@
             // tbReport
             // 
             this.tbReport.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "Report", true));
-            this.tbReport.Location = new System.Drawing.Point(116, 184);
+            this.tbReport.Location = new System.Drawing.Point(116, 249);
             this.tbReport.Multiline = true;
             this.tbReport.Name = "tbReport";
             this.tbReport.Size = new System.Drawing.Size(344, 79);
@@ -255,7 +256,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(27, 288);
+            this.label6.Location = new System.Drawing.Point(27, 338);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 12);
             this.label6.TabIndex = 0;
@@ -265,7 +266,7 @@
             // 
             this.pbImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbImage.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.pbImage.Location = new System.Drawing.Point(541, 25);
+            this.pbImage.Location = new System.Drawing.Point(530, 61);
             this.pbImage.Name = "pbImage";
             this.pbImage.Size = new System.Drawing.Size(226, 178);
             this.pbImage.TabIndex = 7;
@@ -273,7 +274,7 @@
             // 
             // btAdd
             // 
-            this.btAdd.Location = new System.Drawing.Point(530, 217);
+            this.btAdd.Location = new System.Drawing.Point(530, 247);
             this.btAdd.Name = "btAdd";
             this.btAdd.Size = new System.Drawing.Size(75, 23);
             this.btAdd.TabIndex = 8;
@@ -283,7 +284,7 @@
             // 
             // btDelete
             // 
-            this.btDelete.Location = new System.Drawing.Point(681, 4);
+            this.btDelete.Location = new System.Drawing.Point(681, 32);
             this.btDelete.Name = "btDelete";
             this.btDelete.Size = new System.Drawing.Size(75, 23);
             this.btDelete.TabIndex = 8;
@@ -293,7 +294,7 @@
             // 
             // btFix
             // 
-            this.btFix.Location = new System.Drawing.Point(611, 217);
+            this.btFix.Location = new System.Drawing.Point(611, 247);
             this.btFix.Name = "btFix";
             this.btFix.Size = new System.Drawing.Size(75, 23);
             this.btFix.TabIndex = 8;
@@ -303,7 +304,7 @@
             // 
             // btDelete2
             // 
-            this.btDelete2.Location = new System.Drawing.Point(692, 218);
+            this.btDelete2.Location = new System.Drawing.Point(703, 247);
             this.btDelete2.Name = "btDelete2";
             this.btDelete2.Size = new System.Drawing.Size(75, 23);
             this.btDelete2.TabIndex = 8;
@@ -313,7 +314,7 @@
             // 
             // btOpenImage
             // 
-            this.btOpenImage.Location = new System.Drawing.Point(600, 4);
+            this.btOpenImage.Location = new System.Drawing.Point(600, 32);
             this.btOpenImage.Name = "btOpenImage";
             this.btOpenImage.Size = new System.Drawing.Size(75, 23);
             this.btOpenImage.TabIndex = 8;
@@ -324,7 +325,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(528, 15);
+            this.label7.Location = new System.Drawing.Point(528, 37);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 12);
             this.label7.TabIndex = 9;
@@ -332,13 +333,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton4);
-            this.groupBox1.Controls.Add(this.radioButton5);
-            this.groupBox1.Controls.Add(this.radioButton6);
-            this.groupBox1.Location = new System.Drawing.Point(116, 96);
+            this.groupBox1.Controls.Add(this.toyota);
+            this.groupBox1.Controls.Add(this.nissan);
+            this.groupBox1.Controls.Add(this.honnda);
+            this.groupBox1.Controls.Add(this.subaru);
+            this.groupBox1.Controls.Add(this.gaisya);
+            this.groupBox1.Controls.Add(this.sonota);
+            this.groupBox1.Location = new System.Drawing.Point(116, 126);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(355, 33);
             this.groupBox1.TabIndex = 10;
@@ -356,7 +357,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(27, 108);
+            this.label9.Location = new System.Drawing.Point(27, 141);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 12);
             this.label9.TabIndex = 12;
@@ -365,7 +366,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(26, 147);
+            this.label10.Location = new System.Drawing.Point(26, 186);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(35, 12);
             this.label10.TabIndex = 13;
@@ -377,7 +378,7 @@
             // 
             // btOpen
             // 
-            this.btOpen.Location = new System.Drawing.Point(28, 328);
+            this.btOpen.Location = new System.Drawing.Point(29, 370);
             this.btOpen.Name = "btOpen";
             this.btOpen.Size = new System.Drawing.Size(75, 23);
             this.btOpen.TabIndex = 14;
@@ -387,7 +388,7 @@
             // 
             // btSav
             // 
-            this.btSav.Location = new System.Drawing.Point(29, 370);
+            this.btSav.Location = new System.Drawing.Point(29, 419);
             this.btSav.Name = "btSav";
             this.btSav.Size = new System.Drawing.Size(75, 23);
             this.btSav.TabIndex = 15;
@@ -397,7 +398,7 @@
             // 
             // btClose
             // 
-            this.btClose.Location = new System.Drawing.Point(805, 564);
+            this.btClose.Location = new System.Drawing.Point(805, 601);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(75, 23);
             this.btClose.TabIndex = 16;
@@ -547,13 +548,14 @@
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7});
             this.dgvCarReport.DataSource = this.carReportBindingSource;
-            this.dgvCarReport.Location = new System.Drawing.Point(136, 328);
+            this.dgvCarReport.Location = new System.Drawing.Point(136, 370);
             this.dgvCarReport.MultiSelect = false;
             this.dgvCarReport.Name = "dgvCarReport";
             this.dgvCarReport.RowTemplate.Height = 21;
             this.dgvCarReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCarReport.Size = new System.Drawing.Size(744, 220);
             this.dgvCarReport.TabIndex = 26;
+            this.dgvCarReport.Click += new System.EventHandler(this.dgvCarReport_Click);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -578,6 +580,7 @@
             this.dataGridViewTextBoxColumn4.DataPropertyName = "Maker";
             this.dataGridViewTextBoxColumn4.HeaderText = "Maker";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 101;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -607,11 +610,22 @@
             this.tableAdapterManager.CarReportTableAdapter = this.carReportTableAdapter;
             this.tableAdapterManager.UpdateOrder = CarReportSystem.infosys202025DataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(805, 69);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 27;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(907, 686);
+            this.ClientSize = new System.Drawing.Size(907, 636);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvCarReport);
             this.Controls.Add(this.carReportBindingNavigator);
             this.Controls.Add(this.btClose);
@@ -664,12 +678,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbAuthor;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton toyota;
+        private System.Windows.Forms.RadioButton nissan;
+        private System.Windows.Forms.RadioButton honnda;
+        private System.Windows.Forms.RadioButton subaru;
+        private System.Windows.Forms.RadioButton gaisya;
+        private System.Windows.Forms.RadioButton sonota;
         private System.Windows.Forms.ComboBox cbName;
         private System.Windows.Forms.TextBox tbReport;
         private System.Windows.Forms.Label label6;
@@ -715,6 +729,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.Button button1;
     }
 }
 
