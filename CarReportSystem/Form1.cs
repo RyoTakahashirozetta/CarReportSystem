@@ -32,6 +32,7 @@ namespace CarReportSystem
             }
             else
             {
+                /*
                 CarReport carReport = new CarReport
                 {
                     //BindingListへ登録
@@ -41,12 +42,18 @@ namespace CarReportSystem
                     Report = tbReport.Text,
                     Picture = pbImage.Image,
                     Maker = makername()
-                };
+                };*/
+
+                
+
+                
+
+
                 //dgvへの表示
-                _carReports.Insert(0, carReport);
+                //_carReports.Insert(0, carReport);
 
                 btDelete2.Enabled = false;
-                btFix.Enabled = false;
+                //btFix.Enabled = false;
 
                 //コンボボックスの入力候補に追加
                 setComboBoxMakerAuthor(cbAuthor.Text);
@@ -112,6 +119,7 @@ namespace CarReportSystem
 
         private void btFix_Click(object sender, EventArgs e)
         {
+            /*
             CarReport selectedCarReport = _carReports[dgvCarReport.CurrentRow.Index];
             selectedCarReport.CreatedSate = dtpDate.Value;
             selectedCarReport.Author = cbAuthor.Text;
@@ -119,8 +127,17 @@ namespace CarReportSystem
             selectedCarReport.Report = tbReport.Text;
             selectedCarReport.Picture = pbImage.Image;
             selectedCarReport.Maker = makername();
+            */
 
-            
+            dgvCarReport.CurrentRow.Cells[1].Value = dtpDate.Value;
+            dgvCarReport.CurrentRow.Cells[2].Value = cbAuthor.Text;
+            dgvCarReport.CurrentRow.Cells[4].Value = cbName.Text;
+            dgvCarReport.CurrentRow.Cells[5].Value = tbReport.Text;
+
+            this.Validate();
+            this.carReportBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202025DataSet);
+
 
             dgvCarReport.Refresh(); //データグリッドビューの再描画1
         }
@@ -139,7 +156,7 @@ namespace CarReportSystem
 
         void initButton()
         {
-            if (_carReports.Count == 0)
+            if (dgvCarReport == null)
             {
                 btFix.Enabled = false;
                 btDelete2.Enabled = false;
@@ -181,7 +198,7 @@ namespace CarReportSystem
         {
             dgvCarReport.ClearSelection();
 
-            dtpDate.Value = DateTime.Now;
+            dtpDate.Value = DateTime.Today;
             cbAuthor.Text = null;
             cbName.Text = null;
             pbImage.Image = null;
@@ -194,14 +211,18 @@ namespace CarReportSystem
             
             if (dgvCarReport.CurrentRow != null)
             {
-                var Maker = dgvCarReport.CurrentRow.Cells[3].Value; //選択している行の指定したセルの値を取得
+                //var Maker = dgvCarReport.CurrentRow.Cells[3].Value; //選択している行の指定したセルの値を取得
                 /* CarReport selectedCarReport = _carReports[dgvCarReport.CurrentRow.Index];
                  dtpDate.Value = selectedCarReport.CreatedSate.Date;
                  cbAuthor.Text = selectedCarReport.Author;
                  cbName.Text = selectedCarReport.Name;
                  tbReport.Text = selectedCarReport.Report;
                  pbImage.Image = selectedCarReport.Picture;*/
-               // radioButtonSelect();
+                // radioButtonSelect();
+                dtpDate.Text = dgvCarReport.CurrentRow.Cells[1].Value.ToString();
+                cbAuthor.Text = dgvCarReport.CurrentRow.Cells[2].Value.ToString();
+                cbName.Text = dgvCarReport.CurrentRow.Cells[4].Value.ToString();
+                tbReport.Text = dgvCarReport.CurrentRow.Cells[5].Value.ToString();
                 SelectMaker();      
                 initButton();
             }
