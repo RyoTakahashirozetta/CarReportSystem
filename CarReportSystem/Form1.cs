@@ -133,6 +133,15 @@ namespace CarReportSystem
             dgvCarReport.CurrentRow.Cells[2].Value = cbAuthor.Text;
             dgvCarReport.CurrentRow.Cells[4].Value = cbName.Text;
             dgvCarReport.CurrentRow.Cells[5].Value = tbReport.Text;
+            if (pbImage.Image != null)
+            {
+                dgvCarReport.CurrentRow.Cells[6].Value = ImageToByteArray(pbImage.Image);
+            }
+            else
+            {
+                dgvCarReport.CurrentRow.Cells[6].Value = null;
+            }
+            
 
             this.Validate();
             this.carReportBindingSource.EndEdit();
@@ -156,7 +165,7 @@ namespace CarReportSystem
 
         void initButton()
         {
-            if (dgvCarReport == null)
+            if (btFix.Enabled == true)
             {
                 btFix.Enabled = false;
                 btDelete2.Enabled = false;
@@ -173,7 +182,7 @@ namespace CarReportSystem
         {
             // TODO: このコード行はデータを 'infosys202025DataSet.CarReport' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
             
-            initButton();
+            //initButton();
             dgvCarReport.Columns[0].Visible = false; //idを非表示にする
         }
 
@@ -211,20 +220,34 @@ namespace CarReportSystem
             
             if (dgvCarReport.CurrentRow != null)
             {
-                //var Maker = dgvCarReport.CurrentRow.Cells[3].Value; //選択している行の指定したセルの値を取得
-                /* CarReport selectedCarReport = _carReports[dgvCarReport.CurrentRow.Index];
-                 dtpDate.Value = selectedCarReport.CreatedSate.Date;
-                 cbAuthor.Text = selectedCarReport.Author;
-                 cbName.Text = selectedCarReport.Name;
-                 tbReport.Text = selectedCarReport.Report;
-                 pbImage.Image = selectedCarReport.Picture;*/
-                // radioButtonSelect();
+                try
+                {
+                    //var Maker = dgvCarReport.CurrentRow.Cells[3].Value; //選択している行の指定したセルの値を取得
+                    /* CarReport selectedCarReport = _carReports[dgvCarReport.CurrentRow.Index];
+                     dtpDate.Value = selectedCarReport.CreatedSate.Date;
+                     cbAuthor.Text = selectedCarReport.Author;
+                     cbName.Text = selectedCarReport.Name;
+                     tbReport.Text = selectedCarReport.Report;
+                     pbImage.Image = selectedCarReport.Picture;*/
+                    // radioButtonSelect();
                 dtpDate.Text = dgvCarReport.CurrentRow.Cells[1].Value.ToString();
                 cbAuthor.Text = dgvCarReport.CurrentRow.Cells[2].Value.ToString();
                 cbName.Text = dgvCarReport.CurrentRow.Cells[4].Value.ToString();
                 tbReport.Text = dgvCarReport.CurrentRow.Cells[5].Value.ToString();
-                SelectMaker();      
-                initButton();
+                SelectMaker();
+                //initButton();
+                //  = dgvCarReport.CurrentRow.Cells[6].Value;
+                
+                    pbImage.Image = ByteArrayToImage((byte[])dgvCarReport.CurrentRow.Cells[6].Value);
+                }
+                catch (InvalidCastException)
+                {
+                    pbImage.Image = null;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -368,6 +391,7 @@ namespace CarReportSystem
             }
         }
 
+        //データベースから画像をピクチャーボックスへ表示するとき
         // バイト配列をImageオブジェクトに変換
         public static Image ByteArrayToImage(byte[] byteData)
         {
@@ -376,6 +400,7 @@ namespace CarReportSystem
             return img;
         }
 
+        //ピクチャーボックスからデータベースへ登録するとき
         // Imageオブジェクトをバイト配列に変換
         public static byte[] ImageToByteArray(Image img)
         {
@@ -390,6 +415,13 @@ namespace CarReportSystem
             this.Validate();
             this.carReportBindingSource.EndEdit();
             this.tableAdapterManager.UpdateAll(this.infosys202025DataSet);
+        }
+
+        private void btSearchExe_Click(object sender, EventArgs e)
+        {
+            this.carReportTableAdapter.FillByCarName(this.infosys202025DataSet.CarReport, tbSearchName.Text);
+            this.carReportTableAdapter.FillByDate(this.infosys202025DataSet.CarReport, dtSearchDate.Value.ToString());
+            this.carReportTableAdapter.FillByMaker(this.infosys202025DataSet.CarReport, tbSearchMaker.Text);
         }
     }
 }
